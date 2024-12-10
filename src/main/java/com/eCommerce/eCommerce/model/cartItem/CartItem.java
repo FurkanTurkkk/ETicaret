@@ -1,11 +1,11 @@
-package com.eCommerce.eCommerce.model.orderItem;
+package com.eCommerce.eCommerce.model.cartItem;
 
-import com.eCommerce.eCommerce.model.order.Order;
+import com.eCommerce.eCommerce.model.cart.Cart;
 import com.eCommerce.eCommerce.model.product.Product;
 import jakarta.persistence.*;
 
 @Entity
-public class OrderItem {
+public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,20 +15,20 @@ public class OrderItem {
     private final Product product;
 
     @ManyToOne
-    @JoinColumn(name = "orderId")
-    private final Order order;
+    @JoinColumn(name = "cartId",nullable = false)
+    private final Cart cart;
 
     private final int quantity;
 
-    public OrderItem() {
+    public CartItem() {
         this.product = null;
-        this.order = null;
+        this.cart = null;
         this.quantity = 0;
     }
 
-    public OrderItem(Product product, Order order, int quantity) {
+    public CartItem(Product product, Cart cart, int quantity) {
         this.product = product;
-        this.order = order;
+        this.cart = cart;
         this.quantity = quantity;
     }
 
@@ -40,8 +40,8 @@ public class OrderItem {
         return product;
     }
 
-    public Order getOrder() {
-        return order;
+    public Cart getCart() {
+        return cart;
     }
 
     public int getQuantity() {

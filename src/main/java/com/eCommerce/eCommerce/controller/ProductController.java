@@ -2,9 +2,7 @@ package com.eCommerce.eCommerce.controller;
 
 import com.eCommerce.eCommerce.dto.productDto.ProductDto;
 import com.eCommerce.eCommerce.dtoConverter.productDtoConverter.ProductDtoConverter;
-import com.eCommerce.eCommerce.model.category.Category;
-import com.eCommerce.eCommerce.model.product.Product;
-import com.eCommerce.eCommerce.request.RequestOfCreateForProduct;
+import com.eCommerce.eCommerce.request.productRequest.RequestOfCreateForProduct;
 import com.eCommerce.eCommerce.service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,4 +1,4 @@
-package com.eCommerce.eCommerce.request;
+package com.eCommerce.eCommerce.request.productRequest;
 
 
 public class RequestOfCreateForProduct {

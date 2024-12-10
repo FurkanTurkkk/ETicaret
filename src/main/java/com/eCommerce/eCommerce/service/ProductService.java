@@ -5,7 +5,7 @@ import com.eCommerce.eCommerce.dtoConverter.productDtoConverter.ProductDtoConver
 import com.eCommerce.eCommerce.model.category.Category;
 import com.eCommerce.eCommerce.model.product.Product;
 import com.eCommerce.eCommerce.repository.ProductRepository;
-import com.eCommerce.eCommerce.request.RequestOfCreateForProduct;
+import com.eCommerce.eCommerce.request.productRequest.RequestOfCreateForProduct;
 import org.springframework.stereotype.Service;
 
 @Service

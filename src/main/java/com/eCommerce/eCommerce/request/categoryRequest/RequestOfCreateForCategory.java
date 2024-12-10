@@ -1,4 +1,4 @@
-package com.eCommerce.eCommerce.request;
+package com.eCommerce.eCommerce.request.categoryRequest;
 
 public class RequestOfCreateForCategory {
     private final String name;

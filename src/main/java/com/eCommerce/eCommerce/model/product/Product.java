@@ -1,5 +1,6 @@
 package com.eCommerce.eCommerce.model.product;
 
+import com.eCommerce.eCommerce.model.cartItem.CartItem;
 import com.eCommerce.eCommerce.model.category.Category;
 import com.eCommerce.eCommerce.model.orderItem.OrderItem;
 import jakarta.persistence.*;
@@ -15,6 +16,9 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private final Set<OrderItem> orderItems=new HashSet<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private final Set<CartItem> cartItems=new HashSet<>();
 
     @Column(nullable = false)
     private final String name;
@@ -43,6 +47,10 @@ public class Product {
         this.price = price;
         this.stock = stock;
         this.color=color;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Set<OrderItem> getOrderItems() {

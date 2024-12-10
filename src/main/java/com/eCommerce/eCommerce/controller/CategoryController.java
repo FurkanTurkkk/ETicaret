@@ -3,13 +3,10 @@ package com.eCommerce.eCommerce.controller;
 import com.eCommerce.eCommerce.dto.categoryDto.CategoryDto;
 import com.eCommerce.eCommerce.dto.categoryDto.WithProductsCategoryDto;
 import com.eCommerce.eCommerce.model.category.Category;
-import com.eCommerce.eCommerce.request.RequestOfCreateForCategory;
+import com.eCommerce.eCommerce.request.categoryRequest.RequestOfCreateForCategory;
 import com.eCommerce.eCommerce.service.CategoryService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/category")
