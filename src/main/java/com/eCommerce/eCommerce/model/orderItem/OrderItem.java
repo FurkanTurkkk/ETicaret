@@ -1,4 +1,4 @@
-package com.eCommerce.eCommerce.model.orderitem;
+package com.eCommerce.eCommerce.model.orderItem;
 
 import com.eCommerce.eCommerce.model.product.Product;
 import jakarta.persistence.*;
@@ -9,15 +9,15 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "productId",nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "productId")
     private final Product product;
 
-    private final int quantity;
+    public OrderItem() {
+        this.product=null;
+    }
 
-
-    public OrderItem(Product product, int quantity) {
+    public OrderItem(Product product) {
         this.product = product;
-        this.quantity = quantity;
     }
 }

@@ -12,13 +12,24 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "category",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    private final Set<Product> products=new HashSet<>();
+    @OneToMany(mappedBy = "category")
+    private Set<Product> products=new HashSet<>();
 
     private final String name;
 
+    public Category() {
+        this.name="";
+    }
 
     public Category(String name) {
         this.name = name;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public String getName() {
+        return name;
     }
 }
