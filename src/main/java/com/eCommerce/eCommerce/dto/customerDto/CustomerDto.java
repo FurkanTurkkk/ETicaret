@@ -1,6 +1,9 @@
 package com.eCommerce.eCommerce.dto.customerDto;
 
+import com.eCommerce.eCommerce.dto.orderDto.OrderDto;
+
 import java.time.LocalDate;
+import java.util.Set;
 
 public class CustomerDto {
     private  String name;
@@ -9,6 +12,7 @@ public class CustomerDto {
     private  String phoneNumber;
     private  LocalDate birthDay;
     private  String tckn;
+    private  Set<OrderDto> orderDtos;
 
     public CustomerDto(String name,
                        String surName,
@@ -23,6 +27,7 @@ public class CustomerDto {
         this.birthDay = birthDay;
         this.tckn = tckn;
     }
+
 
     public String getName() {
         return name;

@@ -4,6 +4,7 @@ import com.eCommerce.eCommerce.model.cartItem.CartItem;
 import com.eCommerce.eCommerce.model.customer.Customer;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,19 +14,33 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "customerId",nullable = false)
+    @OneToOne(mappedBy = "cart")
     private final Customer customer;
 
-    @OneToMany(mappedBy = "cart",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "cart",cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
     private final Set<CartItem> cartItems=new HashSet<>();
+
+    private double totalPrice;
+
+    private final LocalDate createdDate=LocalDate.now();
 
     public Cart() {
         this.customer=null;
+        this.totalPrice=0;
+
     }
 
     public Cart(Customer customer) {
         this.customer = customer;
+
+    }
+
+    public LocalDate getCreatedDate() {
+        return createdDate;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
     public Long getId() {

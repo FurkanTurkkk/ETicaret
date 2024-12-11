@@ -20,6 +20,8 @@ public class OrderItem {
 
     private final int quantity;
 
+    private double price;
+
     public OrderItem() {
         this.product = null;
         this.order = null;
@@ -30,6 +32,10 @@ public class OrderItem {
         this.product = product;
         this.order = order;
         this.quantity = quantity;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public Long getId() {

@@ -20,6 +20,8 @@ public class CartItem {
 
     private final int quantity;
 
+    private double price;
+
     public CartItem() {
         this.product = null;
         this.cart = null;
@@ -30,6 +32,10 @@ public class CartItem {
         this.product = product;
         this.cart = cart;
         this.quantity = quantity;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public Long getId() {

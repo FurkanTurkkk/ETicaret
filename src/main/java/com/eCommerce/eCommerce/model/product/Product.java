@@ -6,6 +6,7 @@ import com.eCommerce.eCommerce.model.orderItem.OrderItem;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -15,22 +16,22 @@ public class Product {
     private Long id;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private final Set<OrderItem> orderItems=new HashSet<>();
+    private Set<OrderItem> orderItems=new HashSet<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private final Set<CartItem> cartItems=new HashSet<>();
+    private Set<CartItem> cartItems=new HashSet<>();
 
     @Column(nullable = false)
     private final String name;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoryId",nullable = false)
-    private final Category category;
+    private Category category;
 
     @Column(nullable = false)
-    private final double price;
+    private double price;
 
-    private final int stock;
+    private int stock;
 
     private String color;
 
@@ -75,5 +76,34 @@ public class Product {
 
     public String getColor() {
         return color;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Double.compare(price, product.price) == 0
+                && Objects.equals(name, product.name) &&
+                Objects.equals(color, product.color);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, price, color);
+    }
+
+    public void increaseStock(int quantity){
+        this.stock+=quantity;
+    }
+    public void decreaseStock(int quantity){
+        this.stock-=quantity;
+    }
+
+    public static String normalizeName(String name) {
+        if (name == null) {
+            return null;
+        }
+        return name.toLowerCase().replaceAll("[\\s,.-]", "");
     }
 }

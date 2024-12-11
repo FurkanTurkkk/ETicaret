@@ -4,22 +4,33 @@ import com.eCommerce.eCommerce.dto.cartItemDto.CartItemDto;
 import com.eCommerce.eCommerce.dto.customerDto.CustomerDto;
 import com.eCommerce.eCommerce.dto.orderItemDto.OrderItemDto;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 public class OrderDto {
     private Set<OrderItemDto> orderItemDtos;
-    private CustomerDto customerDto;
+    private Long customerId;
+    private double price;
+    private LocalDate createdDate=LocalDate.now();
 
-    public OrderDto(Set<OrderItemDto> orderItemDtos, CustomerDto customerDto) {
+    public OrderDto(Set<OrderItemDto> orderItemDtos, Long customerId) {
         this.orderItemDtos = orderItemDtos;
-        this.customerDto = customerDto;
+        this.customerId=customerId;
+    }
+
+    public LocalDate getCreatedDate() {
+        return createdDate;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public Set<OrderItemDto> getOrderItemDtos() {
         return orderItemDtos;
     }
 
-    public CustomerDto getCustomerDto() {
-        return customerDto;
+    public Long getCustomerId() {
+        return customerId;
     }
 }

@@ -5,10 +5,7 @@ import com.eCommerce.eCommerce.dtoConverter.productDtoConverter.ProductDtoConver
 import com.eCommerce.eCommerce.request.productRequest.RequestOfCreateForProduct;
 import com.eCommerce.eCommerce.service.ProductService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/product")
@@ -23,5 +20,20 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<ProductDto> addNewProduct(@RequestBody RequestOfCreateForProduct request){
         return ResponseEntity.ok(productService.addProduct(request));
+    }
+
+    @GetMapping("/find/name/{productName}")
+    public ResponseEntity<ProductDto> findProductByName(@PathVariable("productName") String name){
+        return ResponseEntity.ok(productService.findProductByName(name));
+    }
+
+    @DeleteMapping("/delete/id/{productId}")
+    public ResponseEntity<String> deleteProductById(@PathVariable("productId") Long id){
+        return ResponseEntity.ok(productService.deleteProductById(id));
+    }
+
+    @DeleteMapping("/delete/name/{productName}")
+    private ResponseEntity<String> deleteProductByName(@PathVariable("productName") String name){
+        return ResponseEntity.ok(productService.deleteProductByName(name));
     }
 }
