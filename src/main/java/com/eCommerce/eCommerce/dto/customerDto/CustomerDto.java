@@ -3,6 +3,7 @@ package com.eCommerce.eCommerce.dto.customerDto;
 import com.eCommerce.eCommerce.dto.orderDto.OrderDto;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 public class CustomerDto {
@@ -12,7 +13,7 @@ public class CustomerDto {
     private  String phoneNumber;
     private  LocalDate birthDay;
     private  String tckn;
-    private  Set<OrderDto> orderDtos;
+    private  Set<OrderDto> orderDtos=new HashSet<>();
 
     public CustomerDto(String name,
                        String surName,
@@ -28,6 +29,9 @@ public class CustomerDto {
         this.tckn = tckn;
     }
 
+    public Set<OrderDto> getOrderDtos() {
+        return orderDtos;
+    }
 
     public String getName() {
         return name;

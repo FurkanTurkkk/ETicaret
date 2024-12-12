@@ -38,4 +38,18 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(e.getMessage(),HttpStatus.FOUND);
     }
 
+    @ExceptionHandler
+    public ResponseEntity<String> handleCartNotFoundException(CartNotFoundException e){
+        return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<String> handleCartItemHasThisProductException(CartItemHasThisProductException e){
+        return new ResponseEntity<>(e.getMessage(),HttpStatus.FOUND);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<String> handleCartAlreadyExistOfCustomerException(CartAlreadyExistOfCustomerException e){
+        return new ResponseEntity<>(e.getMessage(),HttpStatus.FOUND);
+    }
 }

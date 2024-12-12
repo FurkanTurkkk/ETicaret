@@ -4,6 +4,8 @@ import com.eCommerce.eCommerce.model.cart.Cart;
 import com.eCommerce.eCommerce.model.product.Product;
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 public class CartItem {
     @Id
@@ -12,26 +14,27 @@ public class CartItem {
 
     @ManyToOne
     @JoinColumn(name = "productId",nullable = false)
-    private final Product product;
+    private Product product;
 
     @ManyToOne
     @JoinColumn(name = "cartId",nullable = false)
-    private final Cart cart;
+    private Cart cart;
 
-    private final int quantity;
+    @Column(nullable = false)
+    private int quantity;
 
+    @Column(nullable = false)
     private double price;
 
     public CartItem() {
-        this.product = null;
-        this.cart = null;
-        this.quantity = 0;
+
     }
 
     public CartItem(Product product, Cart cart, int quantity) {
         this.product = product;
         this.cart = cart;
         this.quantity = quantity;
+        this.price=quantity*product.getPrice();
     }
 
     public double getPrice() {
@@ -53,4 +56,31 @@ public class CartItem {
     public int getQuantity() {
         return quantity;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CartItem cartItem = (CartItem) o;
+        return Objects.equals(product, cartItem.product) && Objects.equals(cart, cartItem.cart);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(product, cart);
+    }
+
+    public int increaseQuantity(int quantity){
+        this.quantity+=quantity;
+        return this.quantity;
+    }
+
+    public void decreaseQuantity(int quantity){
+        this.quantity-=quantity;
+    }
+
+    public void increasePrice(int quantity){
+        this.price=quantity*product.getPrice();
+    }
+
 }

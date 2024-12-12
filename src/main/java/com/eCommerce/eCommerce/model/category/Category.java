@@ -16,10 +16,11 @@ public class Category {
     @OneToMany(mappedBy = "category",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<Product> products=new HashSet<>();
 
-    private final String name;
+    @Column(nullable = false)
+    private String name;
 
     public Category() {
-        this.name="";
+
     }
 
     public Category(String name) {

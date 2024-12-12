@@ -21,7 +21,7 @@ public class Customer {
     @OneToMany(mappedBy = "customer",fetch = FetchType.LAZY,orphanRemoval = true,cascade = CascadeType.ALL)
     private final Set<Order> orders=new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "cartId",referencedColumnName = "id")
     private Cart cart;
 
@@ -70,7 +70,7 @@ public class Customer {
         return orders;
     }
 
-    public Cart getCarts() {
+    public Cart getCart() {
         return cart;
     }
 
@@ -112,5 +112,13 @@ public class Customer {
             return null;
         }
         return name.toLowerCase().replaceAll("[\\s,.-]", "");
+    }
+
+    public void addCart(Cart cart){
+        this.cart=cart;
+    }
+
+    public void deleteCart(){
+        this.cart=null;
     }
 }

@@ -1,7 +1,6 @@
 package com.eCommerce.eCommerce.controller;
 
 import com.eCommerce.eCommerce.dto.productDto.ProductDto;
-import com.eCommerce.eCommerce.dtoConverter.productDtoConverter.ProductDtoConverter;
 import com.eCommerce.eCommerce.request.productRequest.RequestOfCreateForProduct;
 import com.eCommerce.eCommerce.service.ProductService;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +12,7 @@ public class ProductController {
 
     private final ProductService productService;
 
-    public ProductController(ProductService productService, ProductDtoConverter converter, CategoryController categoryController) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
@@ -22,9 +21,10 @@ public class ProductController {
         return ResponseEntity.ok(productService.addProduct(request));
     }
 
-    @GetMapping("/find/name/{productName}")
-    public ResponseEntity<ProductDto> findProductByName(@PathVariable("productName") String name){
-        return ResponseEntity.ok(productService.findProductByName(name));
+    @GetMapping("/find/name-color/{productName}/{productColor}")
+    public ResponseEntity<ProductDto> findProductByName(@PathVariable("productName") String name,
+                                                        @PathVariable("productColor") String color){
+        return ResponseEntity.ok(productService.findProductByNameAndColor(name,color));
     }
 
     @DeleteMapping("/delete/id/{productId}")
@@ -32,8 +32,9 @@ public class ProductController {
         return ResponseEntity.ok(productService.deleteProductById(id));
     }
 
-    @DeleteMapping("/delete/name/{productName}")
-    private ResponseEntity<String> deleteProductByName(@PathVariable("productName") String name){
-        return ResponseEntity.ok(productService.deleteProductByName(name));
+    @DeleteMapping("/delete/name-color/{productName}/{productColor}")
+    private ResponseEntity<String> deleteProductByNameAndColor(@PathVariable("productName") String name,
+                                                               @PathVariable("productColor") String color){
+        return ResponseEntity.ok(productService.deleteProductByNameAndColor(name,color));
     }
 }

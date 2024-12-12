@@ -10,6 +10,7 @@ public class CartItemDto {
     public CartItemDto(ProductDto productDto, int quantity) {
         this.productDto = productDto;
         this.quantity = quantity;
+        this.price=productDto.getPrice()*quantity;
     }
 
     public double getPrice() {

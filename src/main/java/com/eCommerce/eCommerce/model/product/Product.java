@@ -22,7 +22,7 @@ public class Product {
     private Set<CartItem> cartItems=new HashSet<>();
 
     @Column(nullable = false)
-    private final String name;
+    private String name;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoryId",nullable = false)
@@ -36,10 +36,7 @@ public class Product {
     private String color;
 
     public Product() {
-        this.name = "";
-        this.category = null;
-        this.price = 0;
-        this.stock = 0;
+
     }
 
     public Product(String name, Category category, double price, int stock,String color) {
@@ -83,14 +80,12 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Double.compare(price, product.price) == 0
-                && Objects.equals(name, product.name) &&
-                Objects.equals(color, product.color);
+        return Objects.equals(name, product.name) && Objects.equals(category, product.category) && Objects.equals(color, product.color);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, price, color);
+        return Objects.hash(name, category, color);
     }
 
     public void increaseStock(int quantity){
@@ -100,10 +95,5 @@ public class Product {
         this.stock-=quantity;
     }
 
-    public static String normalizeName(String name) {
-        if (name == null) {
-            return null;
-        }
-        return name.toLowerCase().replaceAll("[\\s,.-]", "");
-    }
+
 }

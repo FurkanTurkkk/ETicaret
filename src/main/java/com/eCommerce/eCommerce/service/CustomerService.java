@@ -25,16 +25,16 @@ public class CustomerService {
     }
 
     public CustomerDto addCustomer(RequestOfCreateForCustomer request){
-        if(customerRepository.findByTckn(request.getTckn()).isPresent()){
-            throw new CustomerExistException("Customer already exist by TCKN "+request.getTckn());
+        if(customerRepository.findByTckn(request.tckn()).isPresent()){
+            throw new CustomerExistException("Customer already exist by TCKN "+request.tckn());
         }
         Customer customer=new Customer(
-                request.getName(),
-                request.getSurName(),
-                request.getEmailAddress(),
-                request.getPhoneNumber(),
-                request.getBirthDay(),
-                request.getTckn()
+                request.name(),
+                request.surName(),
+                request.emailAddress(),
+                request.phoneNumber(),
+                request.birthDay(),
+                request.tckn()
         );
         customerRepository.save(customer);
         return customerDtoConverter.convertToCustomerDto(customer);
