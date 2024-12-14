@@ -1,6 +1,6 @@
-package com.eCommerce.eCommerce.generalClass;
+package com.eCommerce.eCommerce.utilityClasses;
 
-public class NormalizeString {
+public final class NormalizeString {
     public static String normalizeString(String arg) {
         if (arg == null) {
             return null;

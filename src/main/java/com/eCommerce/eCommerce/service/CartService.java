@@ -38,13 +38,17 @@ public class CartService {
 
     public CartDto createCart(RequestOfCreateForCart request){
         Customer customer=customerService.findByTcOrThrow(request.customerTckn());
-        Cart cart=new Cart(customer);
         if(customer.getCart()!=null){
             throw new CartAlreadyExistOfCustomerException("Customer has already cart");
         }
+        Cart cart=new Cart(customer);
         customer.addCart(cart);
         cartRepository.save(cart);
         return cartDtoConverter.convert(cart);
+    }
+
+    public void saveNewCart(Cart cart){
+        cartRepository.save(cart);
     }
 
     public void deleteCart(String tc){

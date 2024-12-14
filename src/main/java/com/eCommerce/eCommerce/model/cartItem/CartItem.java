@@ -1,5 +1,6 @@
 package com.eCommerce.eCommerce.model.cartItem;
 
+import com.eCommerce.eCommerce.exception.NotEnoughProductStockException;
 import com.eCommerce.eCommerce.model.cart.Cart;
 import com.eCommerce.eCommerce.model.product.Product;
 import jakarta.persistence.*;
@@ -71,15 +72,17 @@ public class CartItem {
     }
 
     public int increaseQuantity(int quantity){
-        this.quantity+=quantity;
-        return this.quantity;
+        if(this.product.getStock()<quantity){
+            throw new NotEnoughProductStockException("Cart item quantity more than product stock");
+        }
+        return this.quantity+=quantity;
     }
 
     public void decreaseQuantity(int quantity){
         this.quantity-=quantity;
     }
 
-    public void increasePrice(int quantity){
+    public void upgradePrice(int newQuantity){
         this.price=quantity*product.getPrice();
     }
 

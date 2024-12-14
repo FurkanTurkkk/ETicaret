@@ -1,5 +1,6 @@
 package com.eCommerce.eCommerce.model.order;
 
+import com.eCommerce.eCommerce.model.cart.Cart;
 import com.eCommerce.eCommerce.model.customer.Customer;
 import com.eCommerce.eCommerce.model.orderItem.OrderItem;
 import com.eCommerce.eCommerce.model.payment.Payment;
@@ -22,6 +23,9 @@ public class Order {
 
     @OneToMany(mappedBy = "order",fetch = FetchType.LAZY, cascade = CascadeType.ALL,orphanRemoval = true)
     private final Set<OrderItem> orderItems=new HashSet<>();
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Cart cart;
 
     private final double orderNumber;
 

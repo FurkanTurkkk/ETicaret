@@ -20,7 +20,7 @@ public class CartController {
         return ResponseEntity.ok(cartService.createCart(request));
     }
 
-    @GetMapping("/cartItems/{customerTckn}")
+    @GetMapping("/find/cartItems/{customerTckn}")
     public ResponseEntity<CartDto> getCart(@PathVariable("customerTckn")String tc){
         return ResponseEntity.ok(cartService.getCartByCustomerTckn(tc));
     }

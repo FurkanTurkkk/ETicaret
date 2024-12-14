@@ -52,4 +52,14 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleCartAlreadyExistOfCustomerException(CartAlreadyExistOfCustomerException e){
         return new ResponseEntity<>(e.getMessage(),HttpStatus.FOUND);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<String> handleCartItemNotFoundException(CartItemNotFoundException e){
+        return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<String> handleNotEnoughProductStockException(NotEnoughProductStockException e){
+        return new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
+    }
 }

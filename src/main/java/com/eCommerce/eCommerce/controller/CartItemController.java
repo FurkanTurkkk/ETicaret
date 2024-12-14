@@ -21,9 +21,15 @@ public class CartItemController {
         return ResponseEntity.ok(cartItemService.addCartItem(request));
     }
 
-    @DeleteMapping("/delete/all")
-    public ResponseEntity<String> deleteAllCartItem(){
-        cartItemService.deleteAllCartItem();
-        return ResponseEntity.ok("All cartitems deleted succesfully");
+    @GetMapping("/find/{cartItemId}")
+    public ResponseEntity<CartItemDto> findCartItemById(@PathVariable("cartItemId")Long id){
+        return ResponseEntity.ok(cartItemService.getCartItemDtoById(id));
     }
+
+    @DeleteMapping("/delete/{cartItemId}")
+    public ResponseEntity<String> deleteCartItemById(@PathVariable("cartItemId")Long id){
+        cartItemService.deleteCartItemByCartItemId(id);
+        return ResponseEntity.ok("Cart Item deleted successfully by id : "+id);
+    }
+
 }

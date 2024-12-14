@@ -1,5 +1,6 @@
 package com.eCommerce.eCommerce.model.product;
 
+import com.eCommerce.eCommerce.exception.NotEnoughProductStockException;
 import com.eCommerce.eCommerce.model.cartItem.CartItem;
 import com.eCommerce.eCommerce.model.category.Category;
 import com.eCommerce.eCommerce.model.orderItem.OrderItem;
@@ -15,10 +16,10 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
     private Set<OrderItem> orderItems=new HashSet<>();
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
     private Set<CartItem> cartItems=new HashSet<>();
 
     @Column(nullable = false)
@@ -51,6 +52,10 @@ public class Product {
         return id;
     }
 
+    public Set<CartItem> getCartItems() {
+        return cartItems;
+    }
+
     public Set<OrderItem> getOrderItems() {
         return orderItems;
     }
@@ -80,7 +85,9 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(name, product.name) && Objects.equals(category, product.category) && Objects.equals(color, product.color);
+        return Objects.equals(name, product.name) &&
+                Objects.equals(category, product.category) &&
+                Objects.equals(color, product.color);
     }
 
     @Override
@@ -89,9 +96,13 @@ public class Product {
     }
 
     public void increaseStock(int quantity){
+
         this.stock+=quantity;
     }
     public void decreaseStock(int quantity){
+        if(this.stock<quantity){
+            throw new NotEnoughProductStockException("Product stock can not under 0");
+        }
         this.stock-=quantity;
     }
 

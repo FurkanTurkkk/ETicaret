@@ -2,14 +2,13 @@ package com.eCommerce.eCommerce.model.cart;
 
 import com.eCommerce.eCommerce.model.cartItem.CartItem;
 import com.eCommerce.eCommerce.model.customer.Customer;
+import com.eCommerce.eCommerce.model.order.Order;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 public class Cart {
@@ -21,13 +20,17 @@ public class Cart {
     @NotNull
     private Customer customer;
 
-    @OneToMany(mappedBy = "cart",cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
-    private final Set<CartItem> cartItems=new HashSet<>();
+    @OneToMany(mappedBy = "cart",cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private final Set<CartItem> cartItems = new HashSet<>();
+
+    @OneToOne
+    @JoinColumn(name = "order_id", referencedColumnName = "id", nullable = true)
+    private Order order;
 
     @Column(nullable = false)
     private double totalPrice;
 
-    private final LocalDate createdDate=LocalDate.now();
+    private final LocalDate createdDate = LocalDate.now();
 
     public Cart() {
 
@@ -35,7 +38,7 @@ public class Cart {
 
     public Cart(Customer customer) {
         this.customer = customer;
-        this.totalPrice=0;
+        this.totalPrice = 0;
     }
 
     public LocalDate getCreatedDate() {
@@ -58,12 +61,15 @@ public class Cart {
         return cartItems;
     }
 
-    public void increaseCartPrice(Cart cart){
-       List<Double> prices=cart.getCartItems().stream()
-               .map(CartItem::getPrice).toList();
-       for (Double price : prices){
-           this.totalPrice=price;
-       }
+    public void upgradeTotalPrice() {
+        this.totalPrice = cartItems.stream()
+                .mapToDouble(CartItem::getPrice)
+                .sum();
+    }
+
+    public void removeCartItem(CartItem cartItem) {
+        cartItems.remove(cartItem);
+        upgradeTotalPrice();
     }
 
 }
