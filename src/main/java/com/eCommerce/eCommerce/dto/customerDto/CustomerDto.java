@@ -20,13 +20,15 @@ public class CustomerDto {
                        String emailAddress,
                        String phoneNumber,
                        LocalDate birthDay,
-                       String tckn) {
+                       String tckn,
+                       Set<OrderDto> orderDtos) {
         this.name = name;
         this.surName = surName;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
         this.birthDay = birthDay;
         this.tckn = tckn;
+        this.orderDtos=orderDtos;
     }
 
     public Set<OrderDto> getOrderDtos() {

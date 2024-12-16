@@ -2,7 +2,6 @@ package com.eCommerce.eCommerce.model.customer;
 
 import com.eCommerce.eCommerce.model.cart.Cart;
 import com.eCommerce.eCommerce.model.order.Order;
-import com.eCommerce.eCommerce.model.payment.Payment;
 import jakarta.persistence.*;
 
 
@@ -24,9 +23,6 @@ public class Customer {
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "cartId",referencedColumnName = "id")
     private Cart cart;
-
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
-    private final Set<Payment> payments=new HashSet<>();
 
     private final String name;
     private final String surName;

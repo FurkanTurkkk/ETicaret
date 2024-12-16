@@ -28,10 +28,11 @@ public class OrderItem {
         this.quantity = 0;
     }
 
-    public OrderItem(Product product, Order order, int quantity) {
+    public OrderItem(Product product, Order order, int quantity,double price) {
         this.product = product;
         this.order = order;
         this.quantity = quantity;
+        this.price=price;
     }
 
     public double getPrice() {

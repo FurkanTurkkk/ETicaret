@@ -61,6 +61,10 @@ public class Cart {
         return cartItems;
     }
 
+    public Order getOrder() {
+        return order;
+    }
+
     public void upgradeTotalPrice() {
         this.totalPrice = cartItems.stream()
                 .mapToDouble(CartItem::getPrice)
@@ -70,6 +74,10 @@ public class Cart {
     public void removeCartItem(CartItem cartItem) {
         cartItems.remove(cartItem);
         upgradeTotalPrice();
+    }
+
+    public void addOrder(Order order){
+        this.order=order;
     }
 
 }

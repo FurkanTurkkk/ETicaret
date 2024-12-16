@@ -7,9 +7,10 @@ public class OrderItemDto {
     private int quantity;
     private double price;
 
-    public OrderItemDto(ProductDto productDto, int quantity) {
+    public OrderItemDto(ProductDto productDto, int quantity,double price) {
         this.productDto = productDto;
         this.quantity = quantity;
+        this.price=price;
     }
 
     public double getPrice() {

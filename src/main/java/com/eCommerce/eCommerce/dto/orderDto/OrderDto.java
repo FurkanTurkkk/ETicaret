@@ -13,9 +13,10 @@ public class OrderDto {
     private double price;
     private LocalDate createdDate=LocalDate.now();
 
-    public OrderDto(Set<OrderItemDto> orderItemDtos, Long customerId) {
+    public OrderDto(Set<OrderItemDto> orderItemDtos, Long customerId,double price) {
         this.orderItemDtos = orderItemDtos;
         this.customerId=customerId;
+        this.price=price;
     }
 
     public LocalDate getCreatedDate() {

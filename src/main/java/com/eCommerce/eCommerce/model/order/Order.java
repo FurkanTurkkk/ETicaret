@@ -3,7 +3,6 @@ package com.eCommerce.eCommerce.model.order;
 import com.eCommerce.eCommerce.model.cart.Cart;
 import com.eCommerce.eCommerce.model.customer.Customer;
 import com.eCommerce.eCommerce.model.orderItem.OrderItem;
-import com.eCommerce.eCommerce.model.payment.Payment;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -22,7 +21,7 @@ public class Order {
     private final Customer customer;
 
     @OneToMany(mappedBy = "order",fetch = FetchType.LAZY, cascade = CascadeType.ALL,orphanRemoval = true)
-    private final Set<OrderItem> orderItems=new HashSet<>();
+    private Set<OrderItem> orderItems=new HashSet<>();
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private Cart cart;
@@ -33,20 +32,17 @@ public class Order {
 
     private final LocalDate createdDate=LocalDate.now();
 
-    @OneToOne(mappedBy = "order")
-    private final Payment payment;
-
     public Order() {
         this.customer=null;
         this.orderNumber=0;
-        this.payment=null;
     }
 
-    public Order(Customer customer, Long orderNumber,Payment payment) {
+    public Order(Customer customer,Cart cart,Set<OrderItem> orderItems,double price) {
         this.customer = customer;
-        this.orderNumber = Math.random()*1000;
-        this.payment=payment;
-
+        this.orderNumber = Math.pow(price,2);
+        this.cart=cart;
+        this.orderItems=orderItems;
+        this.price=price;
     }
 
     public double getPrice() {
@@ -72,4 +68,9 @@ public class Order {
     public double getOrderNumber() {
         return orderNumber;
     }
+
+    public Cart getCart() {
+        return cart;
+    }
+
 }

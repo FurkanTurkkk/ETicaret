@@ -1,6 +1,8 @@
 package com.eCommerce.eCommerce.controller;
 
 import com.eCommerce.eCommerce.dto.cartDto.CartDto;
+import com.eCommerce.eCommerce.model.cart.Cart;
+import com.eCommerce.eCommerce.model.customer.Customer;
 import com.eCommerce.eCommerce.request.cartRequest.RequestOfCreateForCart;
 import com.eCommerce.eCommerce.service.CartService;
 import org.springframework.http.ResponseEntity;
@@ -30,4 +32,5 @@ public class CartController {
         cartService.deleteCart(tc);
         return ResponseEntity.ok("Deleted Cart Successfully");
     }
+
 }
